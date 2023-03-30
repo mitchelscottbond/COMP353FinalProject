@@ -1,10 +1,14 @@
 # COMP353FinalProject
 COMP353 Final Project folder using Django framework
 
-This project uses a virtual environment that may need ExecutionPolicies to be changed on your windows machine before running.
-Some basic tips on running this project are found below: 
 
+Some basic tips on running this project are found below: 
+This project uses a virtual environment that may need ExecutionPolicies to be changed on your windows machine before running.
 Open the project folder in visual studio code and open a terminal. 
+
+Run the following commands to set up the virtual environment. 
+'python -m venv venv'
+'venv\Scripts\activate' \\ This command may require execution policies. 
 Run 'pip install django' in the virtual environment.
 
 Run 'pip install mysqlclient' in the virtual environment.
