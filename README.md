@@ -45,3 +45,5 @@ python manage.py inspectdb > models.py
 ```
 
 
+
+If you find that the python manage.py runserver is not working. Try deleting the venv folder and restarting from the beginning. 
