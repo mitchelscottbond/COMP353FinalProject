@@ -16,7 +16,8 @@ class Employee(models.Model):
     postal = models.CharField(max_length=7, blank=True, null=True)
     email = models.CharField(max_length=50, blank=True, null=True)
     citzenship = models.CharField(max_length=30, blank=True, null=True)
-
+    #def __str__(self):
+    #        return self.name
     class Meta:
         managed = False
         db_table = 'Employee'
