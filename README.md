@@ -25,6 +25,11 @@ Run the following command in the virtual environment.
 pip install mysqlclient
 ```
 
+Run the following command in the virtual environment.
+```bash
+pip install pandas
+```
+
 Running the following command will run the server and on a webbrowser enter "localhost:8000" to load the default webpage. (make sure you are in the root directory)
                                                                          "localhost:8000/index" will print "Hello World!"
 
