@@ -47,6 +47,3 @@ python manage.py inspectdb > models.py
 If you are attempting this from home, you need to connect to the School via the Forticlient VPN. 
 
 If you find that the python manage.py runserver is not working. Try deleting the venv folder and restarting from the beginning. 
-
-This is a test commit from Allalou
-
