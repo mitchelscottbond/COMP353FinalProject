@@ -1,0 +1,32 @@
+Employee addresses
+
+"Alberta", "24 Average Avenue", "Edmonton", "Q9T 4H3",
+
+"Quebec", "24 Rich Avenue", "Montreal", "Q9F 4G3",
+
+"Quebec", "15 Corn Street", "Montreal", "D8F 4D9",
+
+"Quebec", "12 Don Street", "Montreal", "D9D 9D9",
+
+"Quebec", "9 Moe Smith Street", "Montreal", "S5S 5S5",
+
+"Quebec", "7 RonDon Street", "Montreal", "R9R 9R9",
+
+"Quebec", "8 George street", "Montreal", "Z6Z 9Z9",
+
+"Quebec", "3 John Street", "Montreal", "F6F 6F6",
+
+"Quebec", "1 Rue De La Montagne", "Montreal", "G5G 5G5",
+
+"Quebec", "1 Crescent", "Montreal", "D4D 4D4",
+
+"Quebec", "789 Rene Levesque", "Montreal", "C3C 3C3",
+
+"Quebec", "456 St Catherine", "Montreal", "B2B 2B2",
+
+"Quebec", "123 Rue Guy", "Montreal", "A1A 1A1",
+
+"Quebec", "12 Don Street", "Montreal", "D9D 9D9",
+
+
+
