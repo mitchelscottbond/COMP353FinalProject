@@ -2,10 +2,19 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"/>
 <h1>Hello World!</h1>
 
-<form action='Query1' method='GET'>
-    <button type='submit'> Query1</button>
+<form action='Employees' method='GET'>
+    <button type='submit'> Employees</button>
     </form>
-
+<form action='Facilities' method='GET'>
+    <button type='submit'> Facilities</button>
+    </form>
+<form action='InfectionRecords' method='GET'>
+    <button type='submit'> Infection Records</button>
+    </form>
+<form action='VaccinationRecords' method='GET'>
+    <button type='submit'> Vaccination Records</button>
+    </form>
+    
 <form method='GET'>
     {{form1.as_p}}
     <button type="submit" class="bluebtn" name="btnform1">Save Changes</button>

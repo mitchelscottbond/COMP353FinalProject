@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 
+
 class Employee(models.Model):
     employeeid = models.IntegerField(db_column='employeeID', primary_key=True)  # Field name made lowercase.
     medicare = models.CharField(unique=True, max_length=12)
@@ -110,6 +111,18 @@ class Vaccine(models.Model):
     class Meta:
         managed = False
         db_table = 'Vaccine'
+
+
+class Workat(models.Model):
+    facilityid = models.ForeignKey(Facility, models.DO_NOTHING, db_column='facilityID')  # Field name made lowercase.
+    employeeid = models.OneToOneField(Employee, models.DO_NOTHING, db_column='employeeID', primary_key=True)  # Field name made lowercase. The composite primary key (employeeID, facilityID, startdate) found, that is not supported. The first column is selected.
+    startdate = models.DateField()
+    enddate = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'WorkAt'
+        unique_together = (('employeeid', 'facilityid', 'startdate'),)
 
 
 class AuthGroup(models.Model):

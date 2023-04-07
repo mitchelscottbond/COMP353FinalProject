@@ -10,16 +10,16 @@
 <body>
     
 
-<h1>This is Query 1</h1>
+<h1>These are Facilities</h1>
 <table class='table'>
     <tr>
-      {% for col in employees.columns %}
+      {% for col in facilities.columns %}
         <td>
           {{col}}
         </td>
       {% endfor %}
     </tr>
-      {% for index, row in employees.iterrows %}
+      {% for index, row in facilities.iterrows %}
         <tr>
           {% for cell in row %}
             <td>
