@@ -13,7 +13,7 @@ def home(request):
 
 def Query1(request):
 
-    employeeIDs = Employee.objects.raw("SELECT employeeID, medicare FROM Employee ORDER BY employeeID DESC")
+    employeeIDs = Employee.objects.raw("SELECT E.employeeID, O.occupationName FROM Employee AS E INNER JOIN EmployeeRole AS ER on ER.employeeID =E.employeeID INNER JOIN Occupation AS O on O.occupationID = ER.occupationID")
 
     df = pd.DataFrame([item.__dict__ for item in employeeIDs])
     df = df[df.columns[1:]]
