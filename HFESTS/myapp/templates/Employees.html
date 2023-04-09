@@ -8,24 +8,69 @@
     <title>Document</title>
 </head>
 <body>
+  <form method="post">
+    {% csrf_token %}
+    <label for="textbox">Enter EmployeeID:</label>
+    <input type="text" id="textbox" name="employeeID">
+    <br></br>
+    <label for="textbox">Enter Medicare #:</label>
+    <input type="text" id="textbox" name="medicare">
+    <br></br>
+    <label for="textbox">Enter first name:</label>
+    <input type="text" id="textbox" name="firstname">
+    <br></br>
+    <label for="textbox">Enter last name:</label>
+    <input type="text" id="textbox" name="lastname">
+    <br></br>
+    <label for="textbox">Enter date of birth:</label>
+    <input type="text" id="textbox" name="dateofbirth">
+    <br></br>
+    <label for="textbox">Enter phone:</label>
+    <input type="text" id="textbox" name="phone">
+    <br></br>
+    <label for="textbox">Enter address:</label>
+    <input type="text" id="textbox" name="address">
+    <br></br>
+    <label for="textbox">Enter postal:</label>
+    <input type="text" id="textbox" name="postal">
+    <br></br>
+    <label for="textbox">Enter email:</label>
+    <input type="text" id="textbox" name="email">
+    <br></br>
+    <label for="textbox">Enter citizenship:</label>
+    <input type="text" id="textbox" name="citizenship">
+    <br></br>
+    <button type="submit">Insert</button>
+    <p>You entered: {{ context.result }}</p>
     
+    <h3>Enter the ID of the Employee you wish to modify: </h3>>
+    <label for="textbox">Enter EmployeeID:</label>
+    <input type="text" id="textbox" name="employeeIDforEditing">
+    <br></br>
+    <input type="hidden" name="button_pressed" value="">
+    <button type="submit" name="button_pressed" value="delete">Delete</button>
+    <button type="submit" name="button_pressed" value="edit">Edit</button>
+</form>
 
 <h1>These are Employees</h1>
 <table class='table'>
     <tr>
-      {% for col in employees.columns %}
+      {% for col in context.employees.columns %}
         <td>
           {{col}}
         </td>
       {% endfor %}
     </tr>
-      {% for index, row in employees.iterrows %}
+      {% for index, row in context.employees.iterrows %}
         <tr>
           {% for cell in row %}
             <td>
               {{cell}}
+          
             </td>
+
           {% endfor %}
+           
         </tr>
       {% endfor %}
   </table>

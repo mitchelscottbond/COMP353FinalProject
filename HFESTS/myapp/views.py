@@ -7,7 +7,7 @@ from myapp.models import Facility
 import myapp.models
 from myapp.models import Infected
 from myapp.models import Received
-from django.db import connection, transaction
+from django.db import connections, transaction
 #import models
 
 # Create your views here.
@@ -17,14 +17,50 @@ def home(request):
 
 #This function returns all the employees in the system partially satisfying criteria 2 in the project.
 def Employees(request):
-
-    employeeIDs = Employee.objects.raw("SELECT E.employeeID, O.occupationName FROM Employee AS E INNER JOIN EmployeeRole AS ER on ER.employeeID =E.employeeID INNER JOIN Occupation AS O on O.occupationID = ER.occupationID")
-
+    result = ""
+    textbox = ""
+    employeeIDs = Employee.objects.raw("SELECT * FROM Employee")
     df = pd.DataFrame([item.__dict__ for item in employeeIDs])
     df = df[df.columns[1:]]
-    print(df)
+    if request.method == 'POST':
+        button_pressed = request.POST.get('button_pressed')
+        if button_pressed == 'delete':
+            employeeIDforEditing = request.POST.get('employeeIDforEditing')
+            with connections['default'].cursor() as cursor:
+                cursor.execute("DELETE FROM Employee WHERE employeeID = %s", [employeeIDforEditing])
+            
+            print(employeeIDforEditing)
+            #This is a delete query to the employee table
+        elif button_pressed == 'edit':
+            rand = "rand"
+            # This is going to be an update to the employee table
 
-    return render (request, 'employees.html', {'employees':df})
+        employeeID = request.POST['employeeID']
+        medicare = request.POST['medicare']
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        dateofbirth = request.POST['dateofbirth']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        postal = request.POST['postal']
+        email = request.POST['email']
+        citizienship = request.POST['citizenship']
+        #print(textbox_text2)
+        # Do something with the text
+        strings = [employeeID, medicare, firstname, lastname, dateofbirth, phone, address, postal, email, citizienship] 
+        result = ', '.join(strings)
+        print(result)
+        context = {
+        'employees': df,
+        'result': result
+        }
+        return render(request, 'employees.html', {'context':context})
+    else:
+        context = {
+        'employees': df,
+        'result': result
+        }
+        return render (request, 'employees.html', {'context':context})
 	
 
 #This function returns all the facilities in the system partially satisfying criteria 1 in the project.
