@@ -10,6 +10,7 @@
 <body>
   <form method="post">
     {% csrf_token %}
+    <input type="hidden" name="button_pressed" value="">
     <label for="textbox">Enter EmployeeID:</label>
     <input type="text" id="textbox" name="employeeID">
     <br></br>
@@ -40,14 +41,14 @@
     <label for="textbox">Enter citizenship:</label>
     <input type="text" id="textbox" name="citizenship">
     <br></br>
-    <button type="submit">Insert</button>
+    <button type="submit" name="button_pressed" value="insert">Insert</button>
     <p>You entered: {{ context.result }}</p>
     
     <h3>Enter the ID of the Employee you wish to modify: </h3>>
     <label for="textbox">Enter EmployeeID:</label>
     <input type="text" id="textbox" name="employeeIDforEditing">
     <br></br>
-    <input type="hidden" name="button_pressed" value="">
+    
     <button type="submit" name="button_pressed" value="delete">Delete</button>
     <button type="submit" name="button_pressed" value="edit">Edit</button>
 </form>

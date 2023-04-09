@@ -34,26 +34,42 @@ def Employees(request):
         elif button_pressed == 'edit':
             rand = "rand"
             # This is going to be an update to the employee table
-
-        employeeID = request.POST['employeeID']
-        medicare = request.POST['medicare']
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        dateofbirth = request.POST['dateofbirth']
-        phone = request.POST['phone']
-        address = request.POST['address']
-        postal = request.POST['postal']
-        email = request.POST['email']
-        citizienship = request.POST['citizenship']
-        #print(textbox_text2)
-        # Do something with the text
-        strings = [employeeID, medicare, firstname, lastname, dateofbirth, phone, address, postal, email, citizienship] 
-        result = ', '.join(strings)
-        print(result)
+        elif button_pressed == "insert":
+            employeeID = request.POST['employeeID']
+            medicare = request.POST['medicare']
+            medicare = f"'{medicare}'"
+            firstname = request.POST['firstname']
+            firstname = f"'{firstname}'"
+            lastname = request.POST['lastname']
+            lastname = f"'{lastname}'"
+            dateofbirth = request.POST['dateofbirth']
+            dateofbirth = f"'{dateofbirth}'"
+            phone = request.POST['phone']
+            phone = f"'{phone}'"
+            address = request.POST['address']
+            address = f"'{address}'"
+            postal = request.POST['postal']
+            postal = f"'{postal}'"
+            email = request.POST['email']
+            email = f"'{email}'"
+            citizienship = request.POST['citizenship']
+            citizienship = f"'{citizienship}'"
+            strings = [employeeID, medicare, firstname, lastname, dateofbirth, phone, address, postal, email, citizienship] 
+            result = ', '.join(strings)
+            print(result)
+            insertquery = f"INSERT INTO Employee(employeeID, medicare, firstName, lastName, dateOfBirth, phone, address, postal, email, citzenship) VALUES({employeeID}, {medicare}, {firstname}, {lastname}, {dateofbirth}, {phone}, {address}, {postal}, {email}, {citizienship})"
+            with connections['default'].cursor() as cursor:
+                cursor.execute(insertquery)
+            
+            context = {
+            'employees': df,
+            'result': result
+            }
+            return render(request, 'employees.html', {'context':context})
         context = {
-        'employees': df,
-        'result': result
-        }
+            'employees': df,
+            'result': result
+            }
         return render(request, 'employees.html', {'context':context})
     else:
         context = {
