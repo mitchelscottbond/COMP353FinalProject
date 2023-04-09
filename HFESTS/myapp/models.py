@@ -16,6 +16,9 @@ class Employee(models.Model):
     email = models.CharField(max_length=50, blank=True, null=True)
     citzenship = models.CharField(max_length=30, blank=True, null=True)
 
+    def __str__(self):
+        return 'Employee bababooey' 
+        
     class Meta:
         managed = False
         db_table = 'Employee'
