@@ -21,11 +21,11 @@ class Employee(models.Model):
     citzenship = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
-        return self.firstname
+        return 'Employee bababooey' 
 
-    class Meta:
-        managed = False
-        db_table = 'Employee'
+    #class Meta:
+     #   managed = False
+      #  db_table = 'Employee'
     
 
 
