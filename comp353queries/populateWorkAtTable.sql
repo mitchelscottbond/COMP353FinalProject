@@ -32,3 +32,25 @@ values (6,3, "2023-02-02");
 
 INSERT INTO WorkAt (facilityID, employeeID, startdate)
 values (9,7, "2019-06-06");
+
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (1,18, "2019-06-06");
+
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (6,20, "2019-06-06");
+
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (1,21, "2019-06-06");
+
+
+
+
+
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (1,15, "2022-06-06");
+
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (1,16, "2021-06-06");
+
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (1,17, "2021-06-06");
