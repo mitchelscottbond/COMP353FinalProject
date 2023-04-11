@@ -8,5 +8,5 @@ FROM Facility AS F LEFT JOIN WorkAt AS W ON F.facilityID = W.facilityID INNER JO
 GROUP BY F.facilityID
 ORDER BY P.province DESC, P.city DESC, F.facilityType DESC, numEmployees DESC
 
-MY test case.
+-- MY test case.
 -- INNER JOIN Employee AS E ON W.employeeID = E.employeeID INNER JOIN EmployeeRole AS ER ON E.employeeID = ER.employeeID
