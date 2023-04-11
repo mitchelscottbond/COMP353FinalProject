@@ -75,7 +75,7 @@ class Occupation(models.Model):
     occupationname = models.CharField(db_column='occupationName', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return occupationid
+        return self.occupationname
 
     class Meta:
         managed = False
@@ -88,7 +88,7 @@ class Postalcode(models.Model):
     city = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
-        return postalcode
+        return self.postalcode
 
 
     class Meta:
@@ -104,7 +104,10 @@ class Received(models.Model):
     facilityid = models.ForeignKey(Facility, models.DO_NOTHING, db_column='facilityID', blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return vaccineid
+        return 'Employee #' + self.employeeid + ': ' + self.datereceived
+
+    class Meta:
+        managed = False
         unique_together = (('employeeid', 'dosenum'),)
 
 
@@ -118,7 +121,7 @@ class Schedules(models.Model):
     occupationname = models.CharField(db_column='occupationName', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return 'Employee  + empoloyeefirstname + : + scheduledate'
+        return 'Employee #' + self.employeeid + ': ' + self.scheduledate
 
     class Meta:
         managed = False
@@ -130,7 +133,7 @@ class Vaccine(models.Model):
     vaccinename = models.CharField(db_column='vaccineName', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return vaccineid
+        return self.vaccinename
 
     class Meta:
         managed = False
@@ -144,7 +147,9 @@ class Workat(models.Model):
     enddate = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return 'employee firstNAME: FACILITYNAME from DATE to DATE/CURRENT'
+        if (self.enddate = null) 
+        return 'Employee #' + self.employeeid + ': ' + self.startdate + ' to ' #currentdate
+        else return 'Employee #' + self.employeeid + ': ' + self.startdate + ' to ' + self.enddate
 
     class Meta:
         managed = False
