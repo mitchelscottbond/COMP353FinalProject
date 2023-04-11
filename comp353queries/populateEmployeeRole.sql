@@ -60,3 +60,8 @@ values (2, 17);
 
 INSERT INTO EmployeeRole(occupationID, EmployeeID)
 values (1, 14);
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (1, 24);
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (2, 25);
