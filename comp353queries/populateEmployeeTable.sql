@@ -23,4 +23,8 @@ VALUES
 (20, "101013501", "Ru", "Paul", "1987-05-05", "0981234568", "12 Don Street", "D9D 9D9", "Ru22y@microsoft.com", "Yes"),
 (21, "107339501", "Ajay", "Smith", "1994-11-21", "5189853538", "15 Corn Street", "D8F 4D9", "ajsmith@gmail.com", "Yes"),
 (22, "1224537859", "Wes", "Jones", "1990-10-17", "44678905471", "24 Rich Avenue", "Q9F 4G3", "wesj2@yahoo.com", "Yes"),
-(23, "1214537859", "Josh", "Jo", "1993-11-17", "44677775471", "24 Average Avenue", "Q9T 4H3", "JoJo@yahoo.com", "Yes");
+(23, "1214537859", "Josh", "Jo", "1993-11-17", "44677775471", "24 Average Avenue", "Q9T 4H3", "JoJo@yahoo.com", "Yes"),
+(24, "274068354", "Tron", "Mech", "1997-09-16", "2429947588", "53 Jon Street", "Q9T 4H3", "TroMe@yahoo.com", "Yes"),
+(25, "294760339", "Fray", "Hi", "1991-02-18", "3520950038", "81 Calm Avenue", "Q9T 4H3", "Fri@yahoo.com", "Yes");
+
+
