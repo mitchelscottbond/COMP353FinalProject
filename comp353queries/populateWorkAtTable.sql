@@ -60,3 +60,8 @@ values (1,14, "2023-01-06");
 
 INSERT INTO WorkAt (facilityID, employeeID, startdate)
 values (1,6, "2020-01-06");
+
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (2,24, "2020-05-11");
+INSERT INTO WorkAt (facilityID, employeeID, startdate)
+values (2,25, "2021-07-12");
