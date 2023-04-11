@@ -1,7 +1,24 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-# Create your models here.
 
+class Emails(models.Model):
+    emailid = models.AutoField(db_column='emailID', primary_key=True)  # Field name made lowercase.
+    emailto = models.CharField(db_column='emailTo', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    emailfrom = models.CharField(db_column='emailFrom', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    emaildate = models.DateField(db_column='emailDate', blank=True, null=True)  # Field name made lowercase.
+    emailsubject = models.CharField(db_column='emailSubject', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    emailbody = models.CharField(db_column='emailBody', max_length=1000, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Emails'
 
 
 class Employee(models.Model):
@@ -16,9 +33,6 @@ class Employee(models.Model):
     email = models.CharField(max_length=50, blank=True, null=True)
     citzenship = models.CharField(max_length=30, blank=True, null=True)
 
-    def __str__(self):
-        return self.firstname + ' ' + self.lastname
-
     class Meta:
         managed = False
         db_table = 'Employee'
@@ -27,9 +41,6 @@ class Employee(models.Model):
 class Employeerole(models.Model):
     occupationid = models.OneToOneField('Occupation', models.DO_NOTHING, db_column='occupationID', primary_key=True)  # Field name made lowercase. The composite primary key (occupationID, employeeID) found, that is not supported. The first column is selected.
     employeeid = models.ForeignKey(Employee, models.DO_NOTHING, db_column='employeeID')  # Field name made lowercase.
-
-    def __str__(self):
-        return str(self.employeeid)
 
     class Meta:
         managed = False
@@ -47,9 +58,6 @@ class Facility(models.Model):
     facilitypostalcode = models.CharField(db_column='facilityPostalCode', max_length=10, blank=True, null=True)  # Field name made lowercase.
     capacity = models.IntegerField(blank=True, null=True)
 
-    def __str__(self):
-        return self.facilityname
-
     class Meta:
         managed = False
         db_table = 'Facility'
@@ -61,9 +69,6 @@ class Infected(models.Model):
     infectiontype = models.CharField(db_column='infectionType', max_length=30, blank=True, null=True)  # Field name made lowercase.
     employeeid = models.ForeignKey(Employee, models.DO_NOTHING, db_column='employeeID')  # Field name made lowercase.
 
-    def __str__(self):
-        return str(self.employeeid) + ': Infected on ' + str(self.infectiondate)
-
     class Meta:
         managed = False
         db_table = 'Infected'
@@ -74,9 +79,6 @@ class Occupation(models.Model):
     occupationid = models.IntegerField(db_column='occupationID', primary_key=True)  # Field name made lowercase.
     occupationname = models.CharField(db_column='occupationName', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
-    def __str__(self):
-        return self.occupationname
-
     class Meta:
         managed = False
         db_table = 'Occupation'
@@ -86,9 +88,6 @@ class Postalcode(models.Model):
     postalcode = models.CharField(db_column='postalCode', primary_key=True, max_length=30)  # Field name made lowercase.
     province = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=30, blank=True, null=True)
-
-    def __str__(self):
-        return self.postalcode
 
     class Meta:
         managed = False
@@ -101,9 +100,6 @@ class Received(models.Model):
     dosenum = models.IntegerField(db_column='doseNum')  # Field name made lowercase.
     datereceived = models.DateField(db_column='dateReceived', blank=True, null=True)  # Field name made lowercase.
     facilityid = models.ForeignKey(Facility, models.DO_NOTHING, db_column='facilityID', blank=True, null=True)  # Field name made lowercase.
-
-    def __str__(self):
-        return str(self.employeeid)
 
     class Meta:
         managed = False
@@ -119,9 +115,6 @@ class Schedules(models.Model):
     endtime = models.TimeField(db_column='endTime', blank=True, null=True)  # Field name made lowercase.
     scheduledate = models.DateField(db_column='scheduleDate', blank=True, null=True)  # Field name made lowercase.
 
-    def __str__(self):
-        return str(self.employeeid) + ': ' + str(self.scheduledate)
-
     class Meta:
         managed = False
         db_table = 'Schedules'
@@ -130,9 +123,6 @@ class Schedules(models.Model):
 class Vaccine(models.Model):
     vaccineid = models.IntegerField(db_column='vaccineID', primary_key=True)  # Field name made lowercase.
     vaccinename = models.CharField(db_column='vaccineName', max_length=30, blank=True, null=True)  # Field name made lowercase.
-
-    def __str__(self):
-        return self.vaccinename
 
     class Meta:
         managed = False
@@ -145,30 +135,12 @@ class Workat(models.Model):
     startdate = models.DateField()
     enddate = models.DateField(blank=True, null=True)
 
-    def __str__(self):
-        return str(self.employeeid) + ': ' + str(self.startdate) + ' to ' + str(self.enddate) + ' at ' + str(self.facilityid)
-
     class Meta:
         managed = False
         db_table = 'WorkAt'
         unique_together = (('employeeid', 'facilityid', 'startdate'),)
 
-class Emails(models.Model):
-    emailid = models.AutoField(db_column='emailID', primary_key=True)  # Field name made lowercase.
-    emailto = models.CharField(db_column='emailTo', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    emailfrom = models.CharField(db_column='emailFrom', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    emaildate = models.DateField(db_column='emailDate', blank=True, null=True)  # Field name made lowercase.
-    emailsubject = models.CharField(db_column='emailSubject', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    emailbody = models.CharField(db_column='emailBody', max_length=1000, blank=True, null=True)  # Field name made lowercase.
 
-    def __str__(self):
-            return self.emailid
-
-    class Meta:
-        managed = False
-        db_table = 'Emails'
-
-    
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 

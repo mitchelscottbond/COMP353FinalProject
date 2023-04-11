@@ -7,6 +7,10 @@ from .models import Postalcode
 from .models import Received
 from .models import Schedules
 from .models import Workat
+from .models import Infected
+from .models import Vaccine
+from .models import Emails
+
 
 admin.site.register(Employee)
 admin.site.register(Facility)
@@ -16,5 +20,8 @@ admin.site.register(Postalcode)
 admin.site.register(Received)
 admin.site.register(Schedules)
 admin.site.register(Workat)
+admin.site.register(Infected)
+admin.site.register(Vaccine)
+admin.site.register(Emails)
 
 # Register your models here.
