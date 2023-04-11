@@ -17,7 +17,7 @@ class Employee(models.Model):
     citzenship = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
-        return 'Employee bababooey' 
+        return self.firstname + ' ' + self.lastname
         
     class Meta:
         managed = False
@@ -27,6 +27,9 @@ class Employee(models.Model):
 class Employeerole(models.Model):
     occupationid = models.OneToOneField('Occupation', models.DO_NOTHING, db_column='occupationID', primary_key=True)  # Field name made lowercase. The composite primary key (occupationID, employeeID) found, that is not supported. The first column is selected.
     employeeid = models.ForeignKey(Employee, models.DO_NOTHING, db_column='employeeID')  # Field name made lowercase.
+    
+    def __str__(self):
+        return 'ID: ' + self.employeeid 
 
     class Meta:
         managed = False
@@ -43,6 +46,9 @@ class Facility(models.Model):
     facilityaddress = models.CharField(db_column='facilityAddress', max_length=50, blank=True, null=True)  # Field name made lowercase.
     facilitypostalcode = models.CharField(db_column='facilityPostalCode', max_length=10, blank=True, null=True)  # Field name made lowercase.
     capacity = models.IntegerField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.facilityname
 
     class Meta:
         managed = False
@@ -55,6 +61,9 @@ class Infected(models.Model):
     infectiontype = models.CharField(db_column='infectionType', max_length=30, blank=True, null=True)  # Field name made lowercase.
     employeeid = models.ForeignKey(Employee, models.DO_NOTHING, db_column='employeeID')  # Field name made lowercase.
 
+    def __str__(self):
+        return self.infectionnumber
+
     class Meta:
         managed = False
         db_table = 'Infected'
@@ -65,6 +74,9 @@ class Occupation(models.Model):
     occupationid = models.IntegerField(db_column='occupationID', primary_key=True)  # Field name made lowercase.
     occupationname = models.CharField(db_column='occupationName', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
+    def __str__(self):
+        return occupationid
+
     class Meta:
         managed = False
         db_table = 'Occupation'
@@ -74,6 +86,10 @@ class Postalcode(models.Model):
     postalcode = models.CharField(db_column='postalCode', primary_key=True, max_length=30)  # Field name made lowercase.
     province = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=30, blank=True, null=True)
+
+    def __str__(self):
+        return postalcode
+
 
     class Meta:
         managed = False
@@ -87,9 +103,8 @@ class Received(models.Model):
     datereceived = models.DateField(db_column='dateReceived', blank=True, null=True)  # Field name made lowercase.
     facilityid = models.ForeignKey(Facility, models.DO_NOTHING, db_column='facilityID', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'Received'
+    def __str__(self):
+        return vaccineid
         unique_together = (('employeeid', 'dosenum'),)
 
 
@@ -102,6 +117,9 @@ class Schedules(models.Model):
     scheduledate = models.DateField(db_column='scheduleDate', blank=True, null=True)  # Field name made lowercase.
     occupationname = models.CharField(db_column='occupationName', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
+    def __str__(self):
+        return 'Employee  + empoloyeefirstname + : + scheduledate'
+
     class Meta:
         managed = False
         db_table = 'Schedules'
@@ -110,6 +128,9 @@ class Schedules(models.Model):
 class Vaccine(models.Model):
     vaccineid = models.IntegerField(db_column='vaccineID', primary_key=True)  # Field name made lowercase.
     vaccinename = models.CharField(db_column='vaccineName', max_length=30, blank=True, null=True)  # Field name made lowercase.
+
+    def __str__(self):
+        return vaccineid
 
     class Meta:
         managed = False
@@ -121,6 +142,9 @@ class Workat(models.Model):
     employeeid = models.OneToOneField(Employee, models.DO_NOTHING, db_column='employeeID', primary_key=True)  # Field name made lowercase. The composite primary key (employeeID, facilityID, startdate) found, that is not supported. The first column is selected.
     startdate = models.DateField()
     enddate = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return 'employee firstNAME: FACILITYNAME from DATE to DATE/CURRENT'
 
     class Meta:
         managed = False
