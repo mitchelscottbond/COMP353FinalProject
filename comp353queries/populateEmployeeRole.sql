@@ -30,3 +30,33 @@ values (7, 9);
 
 INSERT INTO EmployeeRole(occupationID, EmployeeID)
 values (8, 10);
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (7, 18);
+
+
+
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (2, 20);
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (2, 21);
+
+
+
+
+
+
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (1, 15);
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (2, 16);
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (2, 17);
+
+INSERT INTO EmployeeRole(occupationID, EmployeeID)
+values (1, 14);

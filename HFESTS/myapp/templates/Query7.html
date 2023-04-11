@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form method="post">
+    {% csrf_token %}
+
+
+    
+    <h3>Enter the ID of the FacilityID you wish to Query: </h3>>
+    <label for="textbox">Enter FacilityID:</label>
+    <input type="text" id="textbox" name="Query7Facility">
+    <button type="submit" name="button_pressed" value="Run Query#7">Insert</button>
+    <br></br>
+    <p>You entered: {{ context.result }}</p>
+    <br></br>
+</form>
+
+<h1>These are the results of Query7</h1>
+<table class='table'>
+    <tr>
+      {% for col in context.query.columns %}
+        <td>
+          {{col}}
+        </td>
+      {% endfor %}
+    </tr>
+      {% for index, row in context.query.iterrows %}
+        <tr>
+          {% for cell in row %}
+            <td>
+              {{cell}}
+          
+            </td>
+
+          {% endfor %}
+           
+        </tr>
+      {% endfor %}
+  </table>
+
+</body>
+</html>

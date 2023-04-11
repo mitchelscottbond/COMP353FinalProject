@@ -116,3 +116,33 @@ def Infections(request):
     return render (request, 'Infections.html', {'infections':df})
 
 
+#This function returns a page to display the results of query #7
+def Query7(request):
+
+    result = ""
+    df = ""
+    if request.method == 'POST':
+        facilityID = request.POST['Query7Facility']
+        query7 = f"SELECT E.employeeID, E.firstname, E.lastname, W.startdate, E.dateOfBirth, E.medicare, E.phone, E.address,  P.city, P.province, E.postal, E.citzenship, E.email, O.occupationName FROM Employee AS E INNER JOIN EmployeeRole AS ER on ER.employeeID =E.employeeID INNER JOIN Occupation AS O on O.occupationID = ER.occupationID INNER JOIN PostalCode AS P on E.postal = P.postalCode INNER JOIN WorkAt as W on W.employeeID = E.employeeID  WHERE E.employeeiD in (SELECT W.employeeID FROM WorkAt as W WHERE W.facilityID = {facilityID}) AND W.enddate IS NULL ORDER BY O.occupationName ASC, E.firstname ASC, E.lastname ASC"
+        queryresults = Employee.objects.raw(query7)
+        df = pd.DataFrame([item.__dict__ for item in queryresults])
+        df = df[df.columns[1:]]
+        result = facilityID
+        #with connections['default'].cursor() as cursor:
+           # cursor.execute(query7)
+        
+        context = {
+        'query': df,
+        'result': result
+        }
+        return render(request, 'Query7.html', {'context':context})
+    else:
+        context = {
+        'query': df,
+        'result': result
+        }
+        print("This is running the get request")
+        return render (request, 'Query7.html', {'context':context})
+
+
+
