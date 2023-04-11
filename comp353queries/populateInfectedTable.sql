@@ -50,3 +50,21 @@ values(1,"2023-04-03","COVID-19",20);
 
 INSERT INTO Infected(infectionNumber, infectionDate,infectionType,employeeID)
 values(1,"2023-04-08","COVID-19",21);
+
+INSERT INTO Infected(infectionNumber, infectionDate,infectionType,employeeID)
+values(1,"2020-10-05","COVID-19",24);
+
+INSERT INTO Infected(infectionNumber, infectionDate,infectionType,employeeID)
+values(2,"2020-12-03","COVID-19",24);
+
+INSERT INTO Infected(infectionNumber, infectionDate,infectionType,employeeID)
+values(3,"2021-02-03","COVID-19",24);
+
+INSERT INTO Infected(infectionNumber, infectionDate,infectionType,employeeID)
+values(1,"2020-07-18","COVID-19",25);
+
+INSERT INTO Infected(infectionNumber, infectionDate,infectionType,employeeID)
+values(2,"2021-04-03","COVID-19",25);
+
+INSERT INTO Infected(infectionNumber, infectionDate,infectionType,employeeID)
+values(3,"2022-04-08","COVID-19",25);
