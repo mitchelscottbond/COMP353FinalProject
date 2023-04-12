@@ -7,20 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
+  <h1>Query 8</h1>
   <form method="post">
     {% csrf_token %}
 
-    <h3>Enter the ID of the Facility you wish to Query: </h3>>
-    <label for="textbox">Enter FacilityID:</label>
-    <input type="text" id="textbox" name="Query7Facility">
-    <button type="submit" name="button_pressed" value="Run Query#7">Insert</button>
+    <h2> This query takes a start day, end day, and employee id and returns all 
+      the days they are scheduled to work within that time frame.</h2>
+
+    <h3>Enter the day to start from yyyy-mm-dd</h3>>
+    <label for="textbox">Enter Start time:</label>
+    <input type="text" id="textbox" name="Query8Starttime">
+
+    <h3>Enter the day to end from yyyy-mm-dd</h3>>
+    <label for="textbox">Enter End time:</label>
+    <input type="text" id="textbox" name="Query8endtime">
+
+    <h3>Enter the employee ID: </h3>>
+    <label for="textbox">Enter employee ID:</label>
+    <input type="text" id="textbox" name="Query8empID">
+
+    <button type="submit" name="button_pressed" value="Run Query#8">Insert</button>
+
     <br></br>
     <p>You entered: {{ context.result }}</p>
     <br></br>
+
 </form>
 
-<h1>These are the results of Query 7</h1>
+<h1>These are the results of Query 8</h1>
 <table class='table'>
     <tr>
       {% for col in context.query.columns %}

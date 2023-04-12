@@ -7,6 +7,7 @@ from myapp.models import Facility
 import myapp.models
 from myapp.models import Infected
 from myapp.models import Received
+from myapp.models import Schedules
 from django.db import connections, transaction
 #import models
 
@@ -158,6 +159,37 @@ def Query7(request):
         print("This is running the get request")
         return render (request, 'Query7.html', {'context':context})
 
+#This function returns a page to display the results of query #8
+def Query8(request):
+
+    result = ""
+    df = ""
+    if request.method == 'POST':
+        startinterval = request.POST['Query8Starttime']
+        startinterval = f"'{startinterval}'"
+        endinterval = request.POST['Query8endtime']
+        endinterval = f"'{endinterval}'"
+        employee_id = request.POST['Query8empID']
+
+        query8 = f"SELECT S.scheduleID, F.facilityName, S.scheduleDate, S.startTime, S.endTime FROM Schedules S, Facility F WHERE S.employeeID = {employee_id} AND S.facilityID = F.facilityID AND S.scheduleDate between {startinterval} and {endinterval} ORDER BY F.facilityName ASC, S.scheduleDate ASC, S.startTime ASC"
+        queryresults = Schedules.objects.raw(query8)
+        df = pd.DataFrame([item.__dict__ for item in queryresults])
+        df = df[df.columns[2:]]
+        result = startinterval + ' | ' + endinterval + ' | ' + employee_id
+        context = {
+        'query': df,
+        'result': result
+        }
+        return render(request, 'Query8.html', {'context':context})
+    
+    else:
+        context = {
+        'query': df,
+        'result': result
+        }
+        print("This is running the get request")
+        return render (request, 'Query8.html', {'context':context})
+
 #This function returns a page to display the results of query #9
 def Query9(request):
 
@@ -193,6 +225,33 @@ def Query10(request):
     }
     print("This is running the get request")
     return render (request, 'Query10.html', {'context':context})
+
+#This function returns a page to display the results of query #11
+def Query11(request):
+
+    result = ""
+    df = ""
+    if request.method == 'POST':
+        facilityID_Q11 = request.POST['Query11Facility']
+        facilityID_Q11 = f"'{facilityID_Q11}'"
+        query11 = f"SELECT DISTINCT F.facilityID, E.firstname, E.lastname, O.occupationName FROM Facility AS F INNER JOIN Schedules AS S ON F.facilityID = S.facilityID INNER JOIN Employee AS E ON E.employeeID = S.employeeID INNER JOIN EmployeeRole AS ER ON ER.employeeID = E.employeeID INNER JOIN Occupation AS O ON ER.occupationID = O.occupationID  WHERE S.scheduleID IN ( SELECT DISTINCT S.scheduleID FROM Schedules AS S INNER JOIN Employee AS E ON E.employeeID = S.employeeID INNER JOIN EmployeeRole AS ER ON ER.employeeID = E.employeeID WHERE S.scheduleDate >= DATE_SUB(NOW(), INTERVAL 2 WEEK) AND (ER.occupationID=2 OR ER.occupationID = 1) ) AND F.facilityID = {facilityID_Q11} ORDER BY O.occupationName ASC, E.firstname ASC"
+        queryresults = Employee.objects.raw(query11)
+        df = pd.DataFrame([item.__dict__ for item in queryresults])
+        df = df[df.columns[2:]]
+        result = facilityID
+        context = {
+        'query': df,
+        'result': result
+        }
+        return render(request, 'Query11.html', {'context':context})
+    else:
+        context = {
+        'query': df,
+        'result': result
+        }
+        print("This is running the get request")
+        return render (request, 'Query7.html', {'context':context})
+
 
 #This function returns a page to display the results of query #13
 def Query13(request):
