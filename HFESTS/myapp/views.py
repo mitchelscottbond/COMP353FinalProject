@@ -8,6 +8,7 @@ import myapp.models
 from myapp.models import Infected
 from myapp.models import Received
 from myapp.models import Schedules
+from myapp.models import Emails
 from django.db import connections, transaction
 #import models
 
@@ -214,12 +215,13 @@ def Query10(request):
     result = ""
     df = ""
     if request.method == 'POST':
-        facilityID = request.POST['Query10Facility']
-        #query10 = f"SELECT... "
-        queryresults = Employee.objects.raw(query10)
+        facilityWeb = request.POST['Query10Facility']
+        facilityWeb = f"'{facilityWeb}'"
+        query10 = f"SELECT * FROM Emails WHERE emailFrom = {facilityWeb}"
+        queryresults = Emails.objects.raw(query10)
         df = pd.DataFrame([item.__dict__ for item in queryresults])
         df = df[df.columns[1:]]
-        result = facilityID
+        result = facilityWeb
         context = {
         'query': df,
         'result': result
