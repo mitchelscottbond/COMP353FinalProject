@@ -258,17 +258,18 @@ def Query12(request):
     result = ""
     df = ""
     if request.method == 'POST':
-        facility_id = request.POST['Query12facID']
+        facility_name = request.POST['Query12Name']
+        facility_name = f"'{facility_name}'"
         startinterval = request.POST['Query12Starttime']
         startinterval = f"'{startinterval}'"
         endinterval = request.POST['Query12endtime']
         endinterval = f"'{endinterval}'"
 
-        query12 = f"SELECT S.scheduleID, F.facilityName, O.occupationName, SUM(TIME_TO_SEC(TIMEDIFF(S.endTime, S.startTime))) / 3600 totalHours FROM Schedules S, Facility F, EmployeeRole ER, Occupation O WHERE S.facilityID = F.facilityID AND F.facilityName = '{facility_id}' AND S.employeeID= ER.employeeID AND ER.occupationID = O.occupationID AND S.scheduleDate between {startinterval} AND {endinterval} GROUP BY F.facilityName, O.occupationName ORDER BY occupationName ASC"
+        query12 = f"SELECT S.scheduleID, F.facilityName, O.occupationName, SUM(TIME_TO_SEC(TIMEDIFF(S.endTime, S.startTime))) / 3600 totalHours FROM Schedules S, Facility F, EmployeeRole ER, Occupation O WHERE S.facilityID = F.facilityID AND F.facilityName = {facility_name} AND S.employeeID = ER.employeeID AND ER.occupationID = O.occupationID AND S.scheduleDate between {startinterval} AND {endinterval} GROUP BY F.facilityName, O.occupationName ORDER BY occupationName ASC"
         queryresults = Schedules.objects.raw(query12)
         df = pd.DataFrame([item.__dict__ for item in queryresults])
-        df = df[df.columns[2:]]
-        result = startinterval + ' | ' + endinterval + ' | ' + str(facility_id)
+        df = df[df.columns[1:]]
+        result = facility_name + ' | ' + startinterval + ' | ' + endinterval
         context = {
         'query': df,
         'result': result

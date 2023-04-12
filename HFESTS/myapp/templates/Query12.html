@@ -13,8 +13,12 @@
   <form method="post">
     {% csrf_token %}
 
-    <h2> This query takes a start day, end day, and facility id and
+    <h2> This query takes a start day, end day, and facility name and
        returns the total hours scheduled for every role.</h2>
+
+    <h3>Enter the Facility Name: </h3>>
+    <label for="textbox">Enter Facility Name:</label>
+    <input type="text" id="textbox" name="Query12Name">
 
     <h3>Enter the day to start from yyyy-mm-dd</h3>>
     <label for="textbox">Enter Start time:</label>
@@ -23,10 +27,6 @@
     <h3>Enter the day to end from yyyy-mm-dd</h3>>
     <label for="textbox">Enter End time:</label>
     <input type="text" id="textbox" name="Query12endtime">
-
-    <h3>Enter the Facility ID: </h3>>
-    <label for="textbox">Enter Facility ID:</label>
-    <input type="text" id="textbox" name="Query12facID">
 
     <button type="submit" name="button_pressed" value="Run Query#12">Insert</button>
 
