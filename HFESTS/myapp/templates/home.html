@@ -1,18 +1,24 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"/>
-<h1>Hello World!</h1>
+<h1>COMP 353 Final Project</h1>
+<h2>Team Members</h2>
+<h3>Mitchel Scott-Bond <br>
+    Abdul Samad <br>
+    Mohamed Allalou <br>
+    Arvand Azarbar <br>
+</h3>
 
-<form action='Employees' method='GET'>
-    <button type='submit'> Employees</button>
-    </form>
 <form action='Facilities' method='GET'>
     <button type='submit'> Facilities</button>
     </form>
-<form action='InfectionRecords' method='GET'>
-    <button type='submit'> Infection Records</button>
+<form action='Employees' method='GET'>
+    <button type='submit'> Employees</button>
     </form>
 <form action='VaccinationRecords' method='GET'>
     <button type='submit'> Vaccination Records</button>
+    </form>
+<form action='InfectionRecords' method='GET'>
+    <button type='submit'> Infection Records</button>
     </form>
 <form action='Query6page' method='GET'>
     <button type='submit'> Query#6</button>
@@ -50,12 +56,3 @@
 <form action='Query17page' method='GET'>
     <button type='submit'> Query#17</button>
     </form> 
-  
-<form method='GET'>
-    {{form1.as_p}}
-    <button type="submit" class="bluebtn" name="btnform1">Save Changes</button>
-    </form>
-    <form method='GET'>
-    {{form2.as_p}}
-    <button type="submit" name="btnform2">Save Changes</button>
-    </form>

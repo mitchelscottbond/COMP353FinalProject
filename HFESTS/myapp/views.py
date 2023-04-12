@@ -309,8 +309,7 @@ def Query14(request):
     result = ""
     df = ""
 
-    query14 = f"SELECT E.employeeID, E.firstname, E.lastname, I.infectionDate, F.facilityName FROM Employee AS E INNER JOIN Infected AS I ON E.employeeID = I.employeeID INNER JOIN WorkAt AS W ON E.employeeID = W.employeeID INNER JOIN Facility AS F ON W.facilityID = F.facilityID WHERE E.employeeID in ( SELECT Infected.employeeID FROM Infected INNER JOIN EmployeeRole ON Infected.employeeID = EmployeeRole.employeeID WHERE infectionDate >= DATE_SUB(NOW(), INTERVAL 2 WEEK) AND EmployeeRole.occupationID = 2) ORDER BY F.facilityName ASC, E.firstname ASC;"
-
+    query14 = f"SELECT E.employeeID, E.firstName, E.lastName, P.city, COUNT(DISTINCT W.facilityID) FacilitiesWorkingAt FROM Employee E, PostalCode P, WorkAt W, EmployeeRole ER, Occupation O WHERE E.postal=P.postalCode AND P.province = 'Quebec' AND E.employeeID = W.employeeID AND E.employeeID = ER.employeeID  AND ER.occupationID = O.occupationID AND O.occupationName = 'Doctor' AND W.enddate IS NULL GROUP BY E.firstName, E.lastName, P.city ORDER BY P.city ASC, FacilitiesWorkingAt DESC"
     queryresults = Employee.objects.raw(query14)
     df = pd.DataFrame([item.__dict__ for item in queryresults])
     df = df[df.columns[2:]]
