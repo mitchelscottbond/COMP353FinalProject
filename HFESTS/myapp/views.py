@@ -234,11 +234,11 @@ def Query11(request):
     if request.method == 'POST':
         facilityID_Q11 = request.POST['Query11Facility']
         facilityID_Q11 = f"'{facilityID_Q11}'"
-        query11 = f"SELECT DISTINCT F.facilityID, E.firstname, E.lastname, O.occupationName FROM Facility AS F INNER JOIN Schedules AS S ON F.facilityID = S.facilityID INNER JOIN Employee AS E ON E.employeeID = S.employeeID INNER JOIN EmployeeRole AS ER ON ER.employeeID = E.employeeID INNER JOIN Occupation AS O ON ER.occupationID = O.occupationID  WHERE S.scheduleID IN ( SELECT DISTINCT S.scheduleID FROM Schedules AS S INNER JOIN Employee AS E ON E.employeeID = S.employeeID INNER JOIN EmployeeRole AS ER ON ER.employeeID = E.employeeID WHERE S.scheduleDate >= DATE_SUB(NOW(), INTERVAL 2 WEEK) AND (ER.occupationID=2 OR ER.occupationID = 1) ) AND F.facilityID = {facilityID_Q11} ORDER BY O.occupationName ASC, E.firstname ASC"
+        query11 = f"SELECT DISTINCT E.employeeID, E.firstname, E.lastname, O.occupationName FROM Facility AS F INNER JOIN Schedules AS S ON F.facilityID = S.facilityID INNER JOIN Employee AS E ON E.employeeID = S.employeeID INNER JOIN EmployeeRole AS ER ON ER.employeeID = E.employeeID INNER JOIN Occupation AS O ON ER.occupationID = O.occupationID  WHERE S.scheduleID IN ( SELECT DISTINCT S.scheduleID FROM Schedules AS S INNER JOIN Employee AS E ON E.employeeID = S.employeeID INNER JOIN EmployeeRole AS ER ON ER.employeeID = E.employeeID WHERE S.scheduleDate >= DATE_SUB(NOW(), INTERVAL 2 WEEK) AND (ER.occupationID=2 OR ER.occupationID = 1) ) AND F.facilityID = {facilityID_Q11} ORDER BY O.occupationName ASC, E.firstname ASC"
         queryresults = Employee.objects.raw(query11)
         df = pd.DataFrame([item.__dict__ for item in queryresults])
         df = df[df.columns[2:]]
-        result = facilityID
+        result = facilityID_Q11
         context = {
         'query': df,
         'result': result
@@ -250,8 +250,38 @@ def Query11(request):
         'result': result
         }
         print("This is running the get request")
-        return render (request, 'Query7.html', {'context':context})
+        return render (request, 'Query11.html', {'context':context})
 
+#This function returns a page to display the results of query #12
+def Query12(request):
+
+    result = ""
+    df = ""
+    if request.method == 'POST':
+        facility_id = request.POST['Query12facID']
+        startinterval = request.POST['Query12Starttime']
+        startinterval = f"'{startinterval}'"
+        endinterval = request.POST['Query12endtime']
+        endinterval = f"'{endinterval}'"
+
+        query12 = f"SELECT S.scheduleID, F.facilityName, O.occupationName, SUM(TIME_TO_SEC(TIMEDIFF(S.endTime, S.startTime))) / 3600 totalHours FROM Schedules S, Facility F, EmployeeRole ER, Occupation O WHERE S.facilityID = F.facilityID AND F.facilityName = '{facility_id}' AND S.employeeID= ER.employeeID AND ER.occupationID = O.occupationID AND S.scheduleDate between {startinterval} AND {endinterval} GROUP BY F.facilityName, O.occupationName ORDER BY occupationName ASC"
+        queryresults = Schedules.objects.raw(query12)
+        df = pd.DataFrame([item.__dict__ for item in queryresults])
+        df = df[df.columns[2:]]
+        result = startinterval + ' | ' + endinterval + ' | ' + str(facility_id)
+        context = {
+        'query': df,
+        'result': result
+        }
+        return render(request, 'Query12.html', {'context':context})
+    
+    else:
+        context = {
+        'query': df,
+        'result': result
+        }
+        print("This is running the get request")
+        return render (request, 'Query12.html', {'context':context})
 
 #This function returns a page to display the results of query #13
 def Query13(request):

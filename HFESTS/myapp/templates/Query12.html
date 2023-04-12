@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+  <h1>Query 12</h1>
+  <form method="post">
+    {% csrf_token %}
+
+    <h2> This query takes a start day, end day, and facility id and
+       returns the total hours scheduled for every role.</h2>
+
+    <h3>Enter the day to start from yyyy-mm-dd</h3>>
+    <label for="textbox">Enter Start time:</label>
+    <input type="text" id="textbox" name="Query12Starttime">
+
+    <h3>Enter the day to end from yyyy-mm-dd</h3>>
+    <label for="textbox">Enter End time:</label>
+    <input type="text" id="textbox" name="Query12endtime">
+
+    <h3>Enter the Facility ID: </h3>>
+    <label for="textbox">Enter Facility ID:</label>
+    <input type="text" id="textbox" name="Query12facID">
+
+    <button type="submit" name="button_pressed" value="Run Query#12">Insert</button>
+
+    <br></br>
+    <p>You entered: {{ context.result }}</p>
+    <br></br>
+
+</form>
+
+<h1>These are the results of Query 12</h1>
+<table class='table'>
+    <tr>
+      {% for col in context.query.columns %}
+        <td>
+          {{col}}
+        </td>
+      {% endfor %}
+    </tr>
+      {% for index, row in context.query.iterrows %}
+        <tr>
+          {% for cell in row %}
+            <td>
+              {{cell}}
+          
+            </td>
+
+          {% endfor %}
+           
+        </tr>
+      {% endfor %}
+  </table>
+
+</body>
+</html>
