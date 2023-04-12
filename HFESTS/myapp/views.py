@@ -213,18 +213,25 @@ def Query10(request):
 
     result = ""
     df = ""
-
-    query10 = f"SELECT F.facilityID, F.facilityName, F.facilityAddress, P.city, P.Province, F.facilityPhone, F.facilityWebAddress, F.facilityType, F.capacity, COUNT(W.employeeID) AS numEmployees FROM Facility AS F LEFT JOIN WorkAt AS W ON F.facilityID = W.facilityID INNER JOIN PostalCode AS P ON P.postalCode = F.facilityPostalCode GROUP BY F.facilityID ORDER BY P.province DESC, P.city DESC, F.facilityType DESC, numEmployees DESC"
-    queryresults = Facility.objects.raw(query10)
-    df = pd.DataFrame([item.__dict__ for item in queryresults])
-    df = df[df.columns[1:]]
-
-    context = {
-    'query': df,
-    'result': result
-    }
-    print("This is running the get request")
-    return render (request, 'Query10.html', {'context':context})
+    if request.method == 'POST':
+        facilityID = request.POST['Query10Facility']
+        #query10 = f"SELECT... "
+        queryresults = Employee.objects.raw(query10)
+        df = pd.DataFrame([item.__dict__ for item in queryresults])
+        df = df[df.columns[1:]]
+        result = facilityID
+        context = {
+        'query': df,
+        'result': result
+        }
+        return render(request, 'Query10.html', {'context':context})
+    else:
+        context = {
+        'query': df,
+        'result': result
+        }
+        print("This is running the get request")
+        return render (request, 'Query10.html', {'context':context})
 
 #This function returns a page to display the results of query #11
 def Query11(request):
